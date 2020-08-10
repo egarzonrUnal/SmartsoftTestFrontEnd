@@ -8,7 +8,10 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { DataComponent } from './components/data/data.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
-
+import { PopupModule } from '@progress/kendo-angular-popup';
+import { EditService } from './core/services/edit.service';
+import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,13 +23,24 @@ import { GridModule } from '@progress/kendo-angular-grid';
     DataComponent
   ],
   imports: [
+    HttpClientModule,
+        HttpClientJsonpModule,
+        ReactiveFormsModule,
     BrowserModule,
     ButtonsModule,
     BrowserAnimationsModule,
     DropDownsModule,
-    GridModule
+    GridModule,
+    PopupModule
   ],
-  providers: [],
+  providers: [
+    {
+      deps: [HttpClient],
+      provide: EditService,
+      useFactory: (jsonp: HttpClient) => () => new EditService(jsonp)
+  }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

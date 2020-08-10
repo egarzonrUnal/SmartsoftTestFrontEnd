@@ -13,4 +13,9 @@ export class ConfigurationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+    public listItems: Array<string> = ["X-Small", "Small", "Medium", "Large", "X-Large", "2X-Large"];
 }
+
+
+
